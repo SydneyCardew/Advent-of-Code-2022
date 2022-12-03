@@ -7,7 +7,7 @@ with open("/storage/emulated/0/Download/input_3.txt", "r+") as input_file:
     group = []
     for index, line in enumerate(input_file):
         sline = line.strip("\n")
-        h = len(sline)//2
+        h = len(sline) // 2
         group.append(sline)
         split_line = [sline[:h], sline[h:]]
         common = list(set(split_line[0]) & set(split_line[1]))[0]
