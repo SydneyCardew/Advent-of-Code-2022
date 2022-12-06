@@ -1,1 +1,1 @@
-I'm traveling, so doing this on Pydroid on my phone, gods help me. 
+The first 5 days were completed on my phone using Pydroid. Back to Pycharm after day 6, which is why the code starts being commented then ^_^;
