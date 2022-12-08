@@ -1,7 +1,7 @@
 def move(inst, m, c):
     if c == '1':
         for moves in range(inst[0]):         
-m[inst[2]].append(m[inst[1]].pop(-1))
+            m[inst[2]].append(m[inst[1]].pop(-1))
     else:
         i = inst[0]
         m[inst[1]], load = m[inst[1]][:-i], m[inst[1]][-i:]
