@@ -43,10 +43,10 @@ def count_and_spin(tree_matrix, tree_counter):
     return tree_matrix, tree_counter
 
 
-def visualiser(tree_matrix, height_matrix):
+def visualiser(tree_matrix, height_matrix, scene_score):
     """This function is used to produce a visualisation for debugging"""
     one_matrix = [[[0, 255, 0] if y[1] else [255, 0, 0] for y in row] for row in tree_matrix]
-    two_matrix = [[[y // 922] * 3 for y in row] for row in height_matrix]
+    two_matrix = [[[y // (scene_score // 255)] * 3 for y in row] for row in height_matrix]
     image_arr_one = np.array(one_matrix)
     image_arr_two = np.array(two_matrix)
     result1 = Image.fromarray(image_arr_one.astype(np.uint8))
@@ -55,7 +55,6 @@ def visualiser(tree_matrix, height_matrix):
     result2 = result2.resize((400, 400))
     result1.save("visual_one.png", "png")
     result2.save("visual_two.png", "png")
-
 
 
 with open("input_8.txt", "r+") as input_file:
@@ -70,9 +69,9 @@ with open("input_8.txt", "r+") as input_file:
         # searches need to be performed
         tree_matrix, tree_counter = count_and_spin(tree_matrix, tree_counter)
 
-    print(tree_counter)
     scenic_matrix = [[math.prod(x[2]) for x in row] for row in tree_matrix]
     # extracts the view distances for part 2 and stores the product of the list
-    print(max([height for row in scenic_matrix for height in row]))
-    visualiser(tree_matrix, scenic_matrix)
+    scene_score = max([height for row in scenic_matrix for height in row])
+    print(tree_counter, scene_score, sep="\n")
+    visualiser(tree_matrix, scenic_matrix, scene_score)
     # prints the maximum of the flattened list of scenic scores
