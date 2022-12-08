@@ -34,7 +34,7 @@ def count_and_spin(tree_matrix, tree_counter):
                 if t[0] < height2:
                     view_count += 1
                 else:
-                    # if the line reaches a taller tree the loop counts the tree and stops
+                    # if the line reaches a taller tree the loop stops
                     view_count += 1
                     break
             tree_matrix[y2][x2][2].append(view_count)
@@ -45,10 +45,17 @@ def count_and_spin(tree_matrix, tree_counter):
 
 def visualiser(tree_matrix, height_matrix):
     """This function is used to produce a visualisation for debugging"""
-    new_matrix = [[[0, 255, 0] if y[1] else [255, 0, 0] for y in row] for row in tree_matrix]
-    image_arr = np.array(new_matrix)
-    result = Image.fromarray(image_arr.astype(np.uint8))
-    result.save("visual.png", "png")
+    one_matrix = [[[0, 255, 0] if y[1] else [255, 0, 0] for y in row] for row in tree_matrix]
+    two_matrix = [[[y // 922] * 3 for y in row] for row in height_matrix]
+    image_arr_one = np.array(one_matrix)
+    image_arr_two = np.array(two_matrix)
+    result1 = Image.fromarray(image_arr_one.astype(np.uint8))
+    result2 = Image.fromarray(image_arr_two.astype(np.uint8))
+    result1 = result1.resize((400, 400))
+    result2 = result2.resize((400, 400))
+    result1.save("visual_one.png", "png")
+    result2.save("visual_two.png", "png")
+
 
 
 with open("input_8.txt", "r+") as input_file:
@@ -66,6 +73,6 @@ with open("input_8.txt", "r+") as input_file:
     print(tree_counter)
     scenic_matrix = [[math.prod(x[2]) for x in row] for row in tree_matrix]
     # extracts the view distances for part 2 and stores the product of the list
-    visualiser(tree_matrix, scenic_matrix)
     print(max([height for row in scenic_matrix for height in row]))
+    visualiser(tree_matrix, scenic_matrix)
     # prints the maximum of the flattened list of scenic scores
