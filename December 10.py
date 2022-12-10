@@ -10,7 +10,7 @@ def check(cycles, answers, register):
 def draw(register, cycle, screen):
     sprite_pos = [register - 1, register, register + 1]
     row = cycle // 40
-    column = cycle % 40 - 1
+    column = (cycle % 40) - 1
     if column in sprite_pos:
         screen[row][column] = '#'
     return screen
